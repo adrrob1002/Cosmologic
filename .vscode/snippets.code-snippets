@@ -1,0 +1,19 @@
+{
+	"Interaction": {
+		"prefix": "interaction",
+		"description": "Create an interaction",
+		"body": [
+			"import { Interaction, OnInteracted } from \"client/controllers/interactions/interactions-decorator\";",
+			"",
+			"@Interaction({",
+			"\tinteractionId: $0,",
+			"\t$1",
+			"})",
+			"export class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} implements OnInteracted {",
+			"\tpublic onInteracted(obj: BasePart) {",
+			"\t\t$2",
+			"\t}",
+			"}",
+		]
+	}
+}
