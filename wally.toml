@@ -1,8 +1,0 @@
-[package]
-name = "adrrob1002/solar-surveyors"
-version = "0.1.0"
-registry = "https://github.com/UpliftGames/wally-index"
-realm = "shared"
-
-[dependencies]
-Luanoid = "raphtalia/luanoid@^1"
