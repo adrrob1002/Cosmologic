@@ -5,17 +5,41 @@ import { Players, Workspace } from "@rbxts/services";
 const localPlayer = Players.LocalPlayer;
 const camera = Workspace.CurrentCamera!;
 
+type PlayerModule = {
+	controls: {
+		activeController?: {
+			jumpRequested: boolean;
+			moveVector: Vector3;
+		};
+	};
+};
+
 @Controller({})
 export class LuanoidController implements OnStart, OnTick {
 	private currentLuanoid?: Luanoid;
+	private playerModule?: PlayerModule;
 
 	onStart() {
 		Players.GetPlayers().forEach((player) => this.playerAdded(player));
 		Players.PlayerAdded.Connect((player) => this.playerAdded(player));
+		this.playerModule = require(localPlayer
+			.WaitForChild("PlayerScripts")
+			.WaitForChild("PlayerModule") as ModuleScript) as PlayerModule;
 	}
 
 	onTick(dt: number): void {
 		if (this.currentLuanoid === undefined || this.currentLuanoid.Character.Parent === undefined) return;
+		if (this.playerModule === undefined) return;
+
+		const activeController = this.playerModule.controls.activeController;
+		if (activeController === undefined) return;
+
+		if (activeController.jumpRequested) {
+			this.currentLuanoid.Jump = true;
+		}
+
+		// TODO - Add gravity here (probably)
+		this.currentLuanoid.Move(activeController.moveVector, true);
 	}
 
 	private playerAdded(player: Player) {
