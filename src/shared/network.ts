@@ -2,7 +2,10 @@ import { Networking } from "@flamework/networking";
 import { IServerResponse } from "types/interfaces/network-types";
 import { IPlayerData } from "./meta/default-player-data";
 
-interface ServerEvents {}
+interface ServerEvents {
+	/** Fired by the client when the client wishes to gain network ownership of a BasePart */
+	requestNetworkOwner(part: BasePart): void;
+}
 
 interface ClientEvents {
 	/** Fired by the server when the player data changes */

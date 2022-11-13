@@ -3,4 +3,5 @@ export const enum Tag {
 	PlayerCharacter = "PlayerCharacter",
 	GravityInfluence = "GravityInfluence",
 	GravityAffected = "GravityAffected",
+	Draggable = "Draggable",
 }
