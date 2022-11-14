@@ -1,5 +1,5 @@
 {
-	"name": "flamework-game",
+	"name": "solar-surveyor-game",
 	"globIgnorePaths": [
 		"**/package.json",
 		"**/tsconfig.json"
@@ -15,10 +15,6 @@
 		"ReplicatedStorage": {
 			"$className": "ReplicatedStorage",
 			
-			"Packages": {
-				"$path": "Packages"
-			},
-
 			"rbxts_include": {
 				"$path": "include",
 				"node_modules": {
