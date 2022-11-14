@@ -29,6 +29,7 @@ export class SpawnerInteraction implements OnInteracted {
 				});
 
 				CollectionService.AddTag(crate, Tag.Draggable);
+				CollectionService.AddTag(crate, Tag.GravityAffected);
 
 				break;
 			}

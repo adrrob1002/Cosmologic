@@ -31,6 +31,7 @@ export class GravityController implements OnStart, OnInit, OnTick, OnRender {
 
 	private previousPart: BasePart;
 	private previousCFrame = new CFrame();
+	private previousColor = new Color3(1, 1, 1);
 
 	private gravityInfluences = new Set<BasePart>();
 
@@ -68,6 +69,10 @@ export class GravityController implements OnStart, OnInit, OnTick, OnRender {
 
 		const standingPart = this.collider?.getStandingPart(this.gravityUp);
 		if (standingPart === undefined) return;
+
+		this.previousPart.Color = this.previousColor;
+		this.previousColor = standingPart.Color;
+		standingPart.Color = Color3.fromRGB(255, 0, 0);
 
 		if (standingPart === this.previousPart) {
 			const offset = this.previousCFrame.ToObjectSpace(this.character.HumanoidRootPart.CFrame);
