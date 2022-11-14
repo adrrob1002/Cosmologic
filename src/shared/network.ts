@@ -1,10 +1,13 @@
 import { Networking } from "@flamework/networking";
+import { BlockType } from "types/enum/block-types";
 import { IServerResponse } from "types/interfaces/network-types";
 import { IPlayerData } from "./meta/default-player-data";
 
 interface ServerEvents {
 	/** Fired by the client when the client wishes to gain network ownership of a BasePart */
 	requestNetworkOwner(part: BasePart): void;
+	/** Called by the client when a block needs to be spawned */
+	spawnBlock(blockType: string, position: Vector3): void;
 }
 
 interface ClientEvents {
