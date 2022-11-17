@@ -8,7 +8,7 @@ const player = Players.LocalPlayer;
 
 @Controller({})
 export class CharacterController implements OnStart {
-	private readonly onCharacterAdded = new Signal<(character: CharacterRigR6 | CharacterRigR15) => void>();
+	public readonly onCharacterAdded = new Signal<(character: CharacterRigR6 | CharacterRigR15) => void>();
 	private currentCharacter?: CharacterRigR6 | CharacterRigR15;
 
 	/** @hidden */
