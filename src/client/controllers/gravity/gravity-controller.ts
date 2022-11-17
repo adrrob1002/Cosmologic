@@ -10,6 +10,7 @@ import { attachSetToTag } from "shared/util/tag-utils";
 import { Tag } from "types/enum/tags";
 import { t } from "@rbxts/t";
 import { CameraController } from "../camera-controller";
+import Signal from "@rbxts/signal";
 
 const player = Players.LocalPlayer;
 
@@ -28,6 +29,7 @@ export class GravityController implements OnStart, OnInit, OnTick, OnRender {
 	private control: Control;
 
 	private gravityUp = new Vector3(0, 1, 0);
+	private onUpVectorChanged = new Signal<(newUp: Vector3) => void>();
 
 	private previousPart: BasePart;
 	private previousCFrame = new CFrame();
@@ -85,6 +87,10 @@ export class GravityController implements OnStart, OnInit, OnTick, OnRender {
 
 		const oldGravity = this.gravityUp;
 		const newGravity = this.getGravityUp(oldGravity);
+
+		if (newGravity !== oldGravity) {
+			this.onUpVectorChanged.Fire(newGravity);
+		}
 
 		const sphericalArc = this.getCFrameRotationBetween(oldGravity, newGravity, camera.CFrame.XVector);
 		const lerpedArc = new CFrame().Lerp(sphericalArc, TRANSITION);
